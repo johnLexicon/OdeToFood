@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,13 +38,34 @@ namespace OdeToFood
             //This calls makes the static files under wwwroot available.
             app.UseStaticFiles();
 
-            app.UseMvcWithDefaultRoute();
+            //Uses the default route for MVC
+            //app.UseMvcWithDefaultRoute();
+
+            //MVC without default route
+            app.UseMvc(ConfigureRoutes);
 
             app.Run(async (context) =>
             {
                 var greeting = greeter.GetMessageOfTheDay();
-                await context.Response.WriteAsync($"{greeting} from the environment: {env.EnvironmentName}");
+                //Adding mime type for the response to the browser.
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync($"Not found!!!");
             });
+        }
+
+        /// <summary>
+        /// Conventional template routing
+        /// </summary>
+        /// <param name="routeBuilder"></param>
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            //The framework adds the word controller to the path e.g Home/index.html becomes HomeController/index.html
+
+            //The default route
+            //The ? sign means the parameter value is optional.
+            // /Home/index/4
+            //routeBuilder.MapRoute("Default", "{controller}/{action}/{id?}");
+            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }
