@@ -72,6 +72,7 @@ namespace OdeToFood
             //The type RequestDelegate is a function that returns a Task there for the async and await
             //must be used.
             app.Run(async (context) =>
+            //This middleware gets executed if  no url matches with the middleware routes from app.UseMvc(ConfigureRoutes)
             {
                 var greeting = greeter.GetMessageOfTheDay();
                 //Adding mime type for the response to the browser.
