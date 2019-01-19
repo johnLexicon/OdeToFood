@@ -33,7 +33,8 @@ namespace OdeToFood
         {
             if (env.IsDevelopment())
             {
-                //Middleware that catches a thrown exception an gives detailed information about the error.
+                //Middleware that catches a if an exception has been thrown from the middleware below and 
+                //gives detailed information about the error.
                 app.UseDeveloperExceptionPage();
             }
 
