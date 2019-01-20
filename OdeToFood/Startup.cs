@@ -59,8 +59,9 @@ namespace OdeToFood
             //Makes files like index.html to be used as default files.
             //app.UseDefaultFiles();
 
+            app.UseFileServer();
             //This calls makes the static files under wwwroot available.
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             //Uses the default route for MVC
             //app.UseMvcWithDefaultRoute();
@@ -78,7 +79,7 @@ namespace OdeToFood
                 var greeting = greeter.GetMessageOfTheDay();
                 //Adding mime type for the response to the browser.
                 context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync($"Not found!!!");
+                await context.Response.WriteAsync($"Not found!!! {env.EnvironmentName}");
             });
         }
 
