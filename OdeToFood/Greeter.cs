@@ -1,4 +1,6 @@
-﻿namespace OdeToFood
+﻿using OdeToFood.Services;
+
+namespace OdeToFood
 {
     public class Greeter : IGreeter
     {

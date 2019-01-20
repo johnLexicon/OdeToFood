@@ -1,10 +1,10 @@
+using OdeToFood.Models;
 
-namespace OdeToFood.Models {
-    public class Restaurant
+namespace OdeToFood.ViewModels.Home
+{
+    public class RestaurantEditModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-
         public CuisineType Cuisine { get; set; }
     }
 }

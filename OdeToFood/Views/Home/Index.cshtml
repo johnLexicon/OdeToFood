@@ -1,4 +1,4 @@
-﻿@model OdeToFood.Models.Restaurant
+﻿@model OdeToFood.ViewModels.Home.HomeIndexViewModel
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <h1>@Model.Name</h1>
+    <h1>Restaurants</h1>
+    <h3>Message of the day: @Model.CurrentMessage</h3>
+    <table>
+        <head>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </head>
+        <body>
+            @foreach (var restaurant in @Model.Restaurants)
+            {
+                <tr>
+                    <td>@restaurant.Id</td>
+                    <td>@restaurant.Name</td>
+                    <td><a asp-controller="Home" asp-action="Details" asp-route-id="@restaurant.Id">More</a></td>
+                </tr>
+            }
+        </body>
+    </table>
+    <a asp-action="Create" asp-controller="Home">New Restaurant</a>
 </body>
 </html>

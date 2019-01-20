@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OdeToFood.Services;
 
 namespace OdeToFood
 {
@@ -23,6 +24,12 @@ namespace OdeToFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
+
+            //Creates a new instance per HttpRequest and throws it away when not needed anymore.
+            //Typically the service type used for Data retrieval objects.
+            //services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+
+            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
 
             //Needs to be added to be able to use the MVC framework.
             services.AddMvc();
@@ -59,9 +66,11 @@ namespace OdeToFood
             //Makes files like index.html to be used as default files.
             //app.UseDefaultFiles();
 
-            app.UseFileServer();
+            //This access all the files in the server.
+            //app.UseFileServer();
+
             //This calls makes the static files under wwwroot available.
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
 
             //Uses the default route for MVC
             //app.UseMvcWithDefaultRoute();
