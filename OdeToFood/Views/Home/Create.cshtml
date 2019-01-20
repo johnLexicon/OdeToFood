@@ -11,11 +11,17 @@
 <body>
     <h1>Create</h1>
     <form method="post">
-        <label></label>
-        <input asp-for="Name"><br/>
-        <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<OdeToFood.Models.CuisineType>()">
-
-        </select>
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name">
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label asp-for="Cuisine">Cuisine: </label>
+            <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<OdeToFood.Models.CuisineType>()">
+            </select>
+            <span asp-validation-for="Cuisine"></span>
+        </div>
         <input type="submit" name="Save" value="Save">
     </form>
 </body>
