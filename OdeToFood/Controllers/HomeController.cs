@@ -9,10 +9,15 @@ namespace OdeToFood.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            var model = new Restaurant {Id = 1, Name = "Fois Gras" };
-            return new ObjectResult(model);
+        // public IActionResult Index()
+        // {
+        //     var model = new Restaurant {Id = 1, Name = "Fois Gras" };
+        //     return new ObjectResult(model);
+        // }
+
+        public IActionResult Index(){
+            var model = new Restaurant() { Id = 1, Name = "Fois Gras Restaurant"};
+            return View(model);
         }
     }
 }
