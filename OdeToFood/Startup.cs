@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OdeToFood.Data;
 using OdeToFood.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace OdeToFood
 {
@@ -19,17 +21,28 @@ namespace OdeToFood
      */
     public class Startup
     {
+        private IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<OdeToFoodDBContext>(options => 
+                options.UseSqlServer(_configuration.GetConnectionString("OdeToFoodContextMac"))
+            );
+
             services.AddSingleton<IGreeter, Greeter>();
 
             //Creates a new instance per HttpRequest and throws it away when not needed anymore.
             //Typically the service type used for Data retrieval objects.
-            //services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
-
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            //Ensures that it will be used by max 1 logical thread.
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
 
             //Needs to be added to be able to use the MVC framework.
             services.AddMvc();

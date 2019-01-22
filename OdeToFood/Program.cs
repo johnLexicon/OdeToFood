@@ -18,6 +18,8 @@ namespace OdeToFood
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            //Will create a web server.
+            //Will also create Injectable Services as IConfiguration.
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
