@@ -1,13 +1,6 @@
 ﻿@model OdeToFood.ViewModels.Home.HomeIndexViewModel
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Home page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+
     <h1>Restaurants</h1>
     <h3>Message of the day: @Model.CurrentMessage</h3>
     <table>
@@ -29,5 +22,4 @@
         </body>
     </table>
     <a asp-action="Create" asp-controller="Home">New Restaurant</a>
-</body>
-</html>
+
