@@ -1,4 +1,8 @@
-﻿@model OdeToFood.ViewModels.Home.DetailsViewModel
+﻿@model DetailsViewModel
+
+@{
+    ViewBag.Title = Model.Restaurant.Name;
+}
 
     <ul>
         <li>Id: @Model.Restaurant.Id</li>

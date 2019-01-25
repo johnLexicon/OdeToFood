@@ -1,8 +1,10 @@
-﻿@model OdeToFood.ViewModels.Home.HomeIndexViewModel
+﻿@model HomeIndexViewModel
 
+@{
+    ViewBag.Title = "Home page";
+}
 
-    <h1>Restaurants</h1>
-    <h3>Message of the day: @Model.CurrentMessage</h3>
+    <h1>All Restaurants</h1>
     <table>
         <head>
             <tr>
@@ -22,4 +24,8 @@
         </body>
     </table>
     <a asp-action="Create" asp-controller="Home">New Restaurant</a>
+
+    @section footer{
+        Message of the day: @Model.CurrentMessage
+    }
 

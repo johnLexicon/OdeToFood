@@ -1,5 +1,8 @@
-@using OdeToFood.Models
-@model OdeToFood.Models.Restaurant
+@model Restaurant
+
+@{
+    ViewBag.Title = "Create page";
+}
 
     <h1>Create</h1>
     <form method="post">
@@ -10,7 +13,7 @@
         </div>
         <div>
             <label asp-for="Cuisine">Cuisine: </label>
-            <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<OdeToFood.Models.CuisineType>()">
+            <select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()">
             </select>
             <span asp-validation-for="Cuisine"></span>
         </div>
