@@ -34,7 +34,7 @@ namespace OdeToFood
         {
 
             services.AddDbContext<OdeToFoodDBContext>(options => 
-                options.UseSqlServer(_configuration.GetConnectionString("OdeToFoodContextMac"))
+                options.UseSqlServer(_configuration.GetConnectionString("StorageDesktop"))
             );
 
             services.AddSingleton<IGreeter, Greeter>();
