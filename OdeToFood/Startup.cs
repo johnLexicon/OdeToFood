@@ -12,6 +12,9 @@ using Microsoft.Extensions.Logging;
 using OdeToFood.Data;
 using OdeToFood.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace OdeToFood
 {
@@ -32,6 +35,17 @@ namespace OdeToFood
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddOpenIdConnect(options => {
+                _configuration.Bind("AzureAd", options);
+            })
+            .AddCookie();
+
 
             services.AddDbContext<OdeToFoodDBContext>(options => 
                 options.UseSqlServer(_configuration.GetConnectionString("StorageDesktop"))
@@ -57,6 +71,9 @@ namespace OdeToFood
                 //gives detailed information about the error.
                 app.UseDeveloperExceptionPage();
             }
+
+            //Middleware for always use SSL (https)
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttpsPermanent());
 
             //Testing own middleware
             app.Use(next => {
@@ -84,6 +101,8 @@ namespace OdeToFood
 
             //This calls makes the static files under wwwroot available.
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             //Uses the default route for MVC
             //app.UseMvcWithDefaultRoute();
